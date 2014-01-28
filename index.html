@@ -7,9 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Multi-page template</title>
 	<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.0.min.css">
+        <link href="css/south-street/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/jqm-demos.css">
 	<link rel="shortcut icon" href="favicon.ico">
-	<script src="js/jquery.js"></script>
+	<script src="js/jquery-1.9.1.js"></script>
+        <script src="js/jquery-ui-1.10.3.custom.js"></script>
 	<script src="js/jquery.mobile-1.4.0.js"></script>
         <style type="text/css">
 		h4	{
@@ -25,6 +27,25 @@
 		$(function() {
 			$("h4").html ('Powered By PixeHub.com');
 			$("h1").html ('INTEREST CALC');
+			
+			  $( "#from" ).datepicker({
+     // defaultDate: "+1w",
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: 'dd-mm-yy',
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $( "#to" ).datepicker({
+      //defaultDate: "+1w",
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: 'dd-mm-yy',
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
 			
 			 $('#submit').click(function( event ) {
 			 	var results = $('#newform').serialize();
@@ -65,9 +86,9 @@
                 <label for="interest" class="ui-hidden-accessible">Text Input:</label>
 		<input type="text" name="interest" id="interest" placeholder="Interest Rate" value="">
                 <label for="from" class="ui-hidden-accessible">Text Input:</label>
-		<input type="text" name="from" id="from" placeholder="" value="07-01-2004">
+		<input type="text" name="from" id="from" placeholder="From Date" value="">
                                 <label for="to" class="ui-hidden-accessible">Text Input:</label>
-		<input type="text" name="to" id="from" placeholder="" value="29-01-2014">
+		<input type="text" name="to" id="to" placeholder="To Date" value="">
                 
                 <label for="submit-8" class="ui-hidden-accessible">Send:</label>
 			<button type="button" id="submit" class="ui-shadow ui-btn ui-corner-all ui-mini">CALCULATE</button>	

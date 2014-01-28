@@ -18,7 +18,10 @@ function getTotalAmount($amount,$days, $interest)
 	return ceil($a);
 
 }
-
+if( empty($_POST['from']) || empty($_POST['to']) || empty($_POST['amount']) || empty($_POST['interest'])) {
+	echo "All fields are required DARLING";
+	exit;
+}
 $date = explode('-', $_POST['from']);
 $fromDate = $date['2'].'-'.$date['1'].'-'.$date['0']; 
 
