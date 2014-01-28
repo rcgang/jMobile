@@ -7,12 +7,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Multi-page template</title>
 	<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.0.min.css">
-        <link href="css/south-street/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+                <link href="css/south-street/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/jqm-demos.css">
 	<link rel="shortcut icon" href="favicon.ico">
-	<script src="js/jquery-1.9.1.js"></script>
-        <script src="js/jquery-ui-1.10.3.custom.js"></script>
+	<script src="js/jquery.js"></script>
+                 <script src="js/jquery-ui-1.10.3.custom.js"></script>
 	<script src="js/jquery.mobile-1.4.0.js"></script>
+
         <style type="text/css">
 		h4	{
 			font-size:12px !important;
@@ -28,7 +29,24 @@
 			$("h4").html ('Powered By PixeHub.com');
 			$("h1").html ('INTEREST CALC');
 			
-			  $( "#from" ).datepicker({
+			 $('#submit').click(function( event ) {
+			 	var results = $('#newform').serialize();
+				
+				$.post( 'http://ashwanthdara.com/dvr/calc.php', results, function (info) {
+				
+					if(info!='') 
+					{
+						$("#resultsContainer").show().html(info);
+					} 
+					
+				});
+			 });
+			 
+			 $('#reload').click(function( event ) {
+			 	location.reload();
+			 });
+			 
+			   $( "#from" ).datepicker({
      // defaultDate: "+1w",
       changeMonth: true,
       changeYear: true,
@@ -46,23 +64,6 @@
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
       }
     });
-			
-			 $('#submit').click(function( event ) {
-			 	var results = $('#newform').serialize();
-				
-				$.post( 'http://ashwanthdara.com/dvr/calc.php', results, function (info) {
-				
-					if(info!='') 
-					{
-						$("#resultsContainer").html(info);
-					} 
-					
-				});
-			 });
-			 
-			 $('#reload').click(function( event ) {
-			 	location.reload();
-			 });
 		});
         </script>
 </head>
@@ -77,10 +78,9 @@
 		<h1>Digital Catalog</h1>
 
 	</div><!-- /header -->
-
-	<div role="main" class="ui-content" id="resultsContainer" >
-		<h2>Interest Calculator</h2>
-                <form class="form-horizontal" name="newform" id="newform" method="post" action="">
+	<div id="resultsContainer" class="ui-content" style="display:none;"></div>
+	<div role="main" class="ui-content" id="" >
+		<form class="form-horizontal" name="newform" id="newform" method="post" action="">
                 <label for="amount" class="ui-hidden-accessible">Text Input:</label>
 		<input type="text" name="amount" id="amount" placeholder="Loan Amount" value="">
                 <label for="interest" class="ui-hidden-accessible">Text Input:</label>
