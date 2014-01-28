@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Multi-page template</title>
+	<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.0.min.css">
+	<link rel="stylesheet" href="css/jqm-demos.css">
+	<link rel="shortcut icon" href="favicon.ico">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.0.js"></script>
+        <style type="text/css">
+		h4	{
+			font-size:12px !important;
+		}
+		h1{
+			font-size:22px !important;
+			text-transform:uppercase;
+			padding:.4em 0 !important
+		}
+        </style>
+        <script>
+		$(function() {
+			$("h4").html ('Powered By PixeHub.com');
+			$("h1").html ('INTEREST CALC');
+			
+			 $('#submit').click(function( event ) {
+			 	var results = $('#newform').serialize();
+				
+				$.post( 'calc.php', results, function (info) {
+				
+					if(info!='') 
+					{
+						$("#resultsContainer").html(info);
+					} 
+					
+				});
+			 });
+			 
+			 $('#reload').click(function( event ) {
+			 	location.reload();
+			 });
+		});
+        </script>
+</head>
+
+<body>
+
+<!-- Start of first page: #one -->
+<div data-role="page" id="one" >
+
+	<div data-role="header" >
+        <a href="index.html" data-icon="home" class="ui-btn-left" data-iconpos="notext" id="reload" >Home</a>
+		<h1>Digital Catalog</h1>
+
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content" id="resultsContainer" >
+		<h2>Interest Calculator</h2>
+                <form class="form-horizontal" name="newform" id="newform" method="post" action="">
+                <label for="amount" class="ui-hidden-accessible">Text Input:</label>
+		<input type="text" name="amount" id="amount" placeholder="Loan Amount" value="">
+                <label for="interest" class="ui-hidden-accessible">Text Input:</label>
+		<input type="text" name="interest" id="interest" placeholder="Interest Rate" value="">
+                <label for="from" class="ui-hidden-accessible">Text Input:</label>
+		<input type="text" name="from" id="from" placeholder="" value="07-01-2004">
+                                <label for="to" class="ui-hidden-accessible">Text Input:</label>
+		<input type="text" name="to" id="from" placeholder="" value="29-01-2014">
+                
+                <label for="submit-8" class="ui-hidden-accessible">Send:</label>
+			<button type="button" id="submit" class="ui-shadow ui-btn ui-corner-all ui-mini">CALCULATE</button>	
+                        </form>
+	</div><!-- /content -->
+
+	<div data-role="footer" data-theme="a">
+		<h4>Powered By PixeHub</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+</body>
+</html>
